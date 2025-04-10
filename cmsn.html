@@ -1,0 +1,308 @@
+<!-- 💝 ĐÃ CHỈNH SỬA - THIỆP SINH NHẬT BẠN THÂN 💝 -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>      
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thiệp Sinh Nhật 20 Tuổi</title>
+  <style>
+    :root {
+      --main-color: #ff69b4;
+      --secondary-color: #87cefa;
+      --text-color: #5a3d2b;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--main-color), var(--secondary-color));
+      overflow-x: hidden;
+      font-family: 'Dancing Script', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    .card-cover {
+      position: relative;
+      width: 300px;
+      height: 400px;
+      margin: 0 auto;
+      background: #fff9f9;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.8s ease;
+      transform-style: preserve-3d;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://i.imgur.com/YourImage.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-cover:hover {
+      transform: scale(1.05);
+    }
+
+    .card-cover::before {
+      content: "🎁 Nhấn để mở thiệp 🎁";
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.2em;
+      color: var(--main-color);
+      animation: pulse 1.5s infinite;
+      background-color: rgba(255,255,255,0.8);
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+
+    .card-open {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 95%;
+      max-width: 700px;
+      height: 400px;
+      background: #fff9f9;
+      border-radius: 20px;
+      padding: 20px 40px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 2;
+      text-align: center;
+      overflow-y: auto;
+    }
+
+    .card-open.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .handwriting {
+      font-size: 1.2em;
+      line-height: 1.8;
+      color: var(--text-color);
+      z-index: 1;
+    }
+
+    .heart, .balloon {
+      position: fixed;
+      animation: float 6s linear infinite;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .heart {
+      color: var(--main-color);
+    }
+
+    .balloon {
+      width: 30px;
+      height: 40px;
+      background: radial-gradient(circle, #ffd700, #ffa500);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+
+    .firework {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #ffd700 0%, #ffec8b 40%, transparent 70%);
+      border-radius: 50%;
+      animation: explode 1.5s ease-out infinite;
+    }
+
+    .glitter {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: radial-gradient(circle, #ffffff, #f8f8f8);
+      border-radius: 50%;
+      animation: sparkle 2s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--main-color);
+      border: none;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1em;
+      transition: background 0.3s;
+    }
+
+    .close-btn:hover {
+      background-color: #ff85c1;
+    }
+
+    .flash {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background: radial-gradient(circle, #ffffff55, transparent 70%);
+      animation: flash 3s infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); }
+      100% { transform: scale(20); opacity: 0; }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.2; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <audio id="music">
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/10/audio_513b8b0c94.mp3?filename=birthday-party-115766.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="flash"></div>
+
+  <div class="container">
+    <div class="card-cover"></div>
+    <div class="card-open">
+      <div class="handwriting">
+        <h1 style="color: var(--main-color);">🎂 Happy 20th Birthday, Phương Anh! 🎉</h1>
+        <p><em>Gửi đến cô bạn thân đặc biệt của tớ... 🌷</em></p>
+        <p>Chúc mừng sinh nhật lần thứ 20 – một cột mốc thật đẹp và đáng nhớ 💖</p>
+        <p>Tuổi 20 là tuổi của rực rỡ, của những ước mơ và bắt đầu khám phá chính mình.<br>
+        Tớ mong cậu luôn vui vẻ, mạnh mẽ và hạnh phúc – dù ở bất cứ đâu, làm điều gì.</p>
+        <p>🌼 Mong cậu luôn:
+        <br>✨ Rạng rỡ như ánh nắng ban mai
+        <br>🌈 Tự do như những đám mây bay
+        <br>🎶 Và dịu dàng như những bản nhạc nhẹ trong tim...</p>
+        <p>Cảm ơn vì đã luôn ở đó – là người bạn, là bờ vai và là tia nắng nhỏ khiến những ngày của tớ tươi sáng hơn 🌞</p>
+        <p style="text-align: right;">Thương cậu nhiều!<br>
+        <span style="font-size: 1.5em;">Bích Phương 💌</span></p>
+        <button class="close-btn" onclick="closeCard()">Đóng lại</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script>
+    const cover = document.querySelector('.card-cover');
+    const card = document.querySelector('.card-open');
+    const audio = document.getElementById('music');
+
+    cover.addEventListener('click', () => {
+      cover.style.transform = 'rotateY(180deg) scale(0)';
+      cover.style.opacity = '0';
+      card.classList.add('active');
+      audio.play();
+      launchConfetti();
+      createHearts();
+      createFireworks();
+      createBalloons();
+      createGlitter();
+    });
+
+    function closeCard() {
+      card.classList.remove('active');
+      cover.style.opacity = '1';
+      cover.style.transform = 'scale(1)';
+    }
+
+    function createHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    }
+
+    function createFireworks() {
+      setInterval(() => {
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = Math.random() * 100 + 'vw';
+        firework.style.top = Math.random() * 100 + 'vh';
+        document.body.appendChild(firework);
+        setTimeout(() => firework.remove(), 1500);
+      }, 1500);
+    }
+
+    function createBalloons() {
+      setInterval(() => {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDuration = Math.random() * 3 + 3 + 's';
+        document.body.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 6000);
+      }, 500);
+    }
+
+    function createGlitter() {
+      setInterval(() => {
+        const glitter = document.createElement('div');
+        glitter.className = 'glitter';
+        glitter.style.left = Math.random() * 100 + 'vw';
+        glitter.style.top = Math.random() * 100 + 'vh';
+        document.body.appendChild(glitter);
+        setTimeout(() => glitter.remove(), 2000);
+      }, 100);
+    }
+
+    function launchConfetti() {
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
